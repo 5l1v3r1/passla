@@ -7,22 +7,22 @@ void duzenDegistir(char *dizi, int boy){
 	srand(time(NULL));
 	int i,a;
 	char *temp;
-	
+
 	for(i=0;i<boy;i++){
 		a=rand()%boy;
 		*temp=dizi[i];
 		dizi[i]=dizi[a];
 		dizi[a]=*temp;
 	}
-	
+
 	dizi[i+1]='\0';
 }
 
 
 
 int main(){
-	
-	setlocale(LC_ALL, "Turkish"); 
+
+	setlocale(LC_ALL, "Turkish");
 	srand((unsigned int)(time(NULL)));
 	int k_sayi,i,lang;
 	char kucuk_harf[26]="abcdefghijklmnoprstuvwxyz";
@@ -31,32 +31,32 @@ int main(){
 	char ozel_karakter[13]="!'^+%&/=?_*";
 	char *pass, *p;
 	char kontrol_buyuk, kontrol_sayi, kontrol_okarakter, secim, duzen;
-	
+
 	printf("Please select the language: (en: 1 /tr: 2): ");
 	scanf("%d",&lang);
-	
-	
+
+
 	if(lang==1){
-		
+
 		do{
-	
-	
+
+
 	printf("How many characters can the password ?: ");
 	scanf("%d",&k_sayi);
-	
+
 	printf("Upper-case letter? (y/n): ");
 	scanf(" %c",&kontrol_buyuk);
-	
+
 	printf("Numbers? (y/n): ");
 	scanf(" %c",&kontrol_sayi);
-	
+
 	printf("Special characthers?: ");
 	scanf(" %c", &kontrol_okarakter);
-	
+
 	pass=(char *)malloc(k_sayi*sizeof(char));
-	
+
 	if(kontrol_buyuk=='y'&&kontrol_sayi=='y'&&kontrol_okarakter=='y'){
-		
+
 		for(i=0;i<k_sayi;i++){
 		pass[i]=kucuk_harf[rand()%(sizeof kucuk_harf-1)];
 		if(i>1){
@@ -64,40 +64,24 @@ int main(){
 				pass[i]=buyuk_harf[rand()%(sizeof buyuk_harf-1)];
 				break;
 			}
-			
+
 			while(i%3==2){
 				pass[i]=sayilar[rand()%(sizeof sayilar-1)];
 				break;
 			}
-			
+
 			while(i%(k_sayi-2)==2){
 				pass[i]=ozel_karakter[rand()%(sizeof ozel_karakter-1)];
 				break;
 			}
-			
+
 		}
-		
+
 	}
 	}
-	
-	if(kontrol_buyuk=='n'&&kontrol_sayi=='y'){
-		
-		for(i=0;i<k_sayi;i++){
-		pass[i]=kucuk_harf[rand()%(sizeof kucuk_harf-1)];
-		if(i>1){
-			
-			while(i%3==2){
-				pass[i]=sayilar[rand()%(sizeof sayilar-1)];
-				break;
-			}
-			
-		}
-		
-	}
-	}
-	
-	if(kontrol_buyuk=='y'&&kontrol_sayi=='n'){
-		
+
+	if(kontrol_buyuk=='y'&&kontrol_sayi=='y'&&kontrol_okarakter=='n'){
+
 		for(i=0;i<k_sayi;i++){
 		pass[i]=kucuk_harf[rand()%(sizeof kucuk_harf-1)];
 		if(i>1){
@@ -105,23 +89,60 @@ int main(){
 				pass[i]=buyuk_harf[rand()%(sizeof buyuk_harf-1)];
 				break;
 			}
-			
+
+			while(i%3==2){
+				pass[i]=sayilar[rand()%(sizeof sayilar-1)];
+				break;
+			}
+
+
 		}
-		
+
 	}
 	}
-	
+
+	if(kontrol_buyuk=='n'&&kontrol_sayi=='y'){
+
+		for(i=0;i<k_sayi;i++){
+		pass[i]=kucuk_harf[rand()%(sizeof kucuk_harf-1)];
+		if(i>1){
+
+			while(i%3==2){
+				pass[i]=sayilar[rand()%(sizeof sayilar-1)];
+				break;
+			}
+
+		}
+
+	}
+	}
+
+	if(kontrol_buyuk=='y'&&kontrol_sayi=='n'){
+
+		for(i=0;i<k_sayi;i++){
+		pass[i]=kucuk_harf[rand()%(sizeof kucuk_harf-1)];
+		if(i>1){
+			while(i%2==1){
+				pass[i]=buyuk_harf[rand()%(sizeof buyuk_harf-1)];
+				break;
+			}
+
+		}
+
+	}
+	}
+
 	if(kontrol_buyuk=='n'&&kontrol_sayi=='n'){
 		printf("This option will generate a low-security password. You should not forget the upper-case letters and numbers in your passwords ...\n");
 		for(i=0;i<k_sayi;i++){
 		pass[i]=kucuk_harf[rand()%(sizeof kucuk_harf-1)];
-		
+
 	}
 	}
-	
-	
-	
-	
+
+
+
+
 	pass[i]='\0'; // Son indisteki içeriði NULL'a eþitledim ki dizginin sonunu belirtelim.
 	printf("\n\n==> Your Password: %s\n\n",pass);
 	printf("Would you like to change the password layout? (y/n): ");
@@ -133,47 +154,47 @@ int main(){
 			printf("Would you like to change the password layout again? (y/n): ");
 			scanf(" %c",&duzen);
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 	free(pass);
 	printf("\nWould you like to create the new password? (y/n): ");
 	scanf(" %c",&secim);
-	
+
 	if(secim=='n'){
 		printf("\n\nRemember to keep your passwords and change them frequently. See you again...\n\n");
 	}
-		
-		
+
+
 	}while(secim=='y');
-		
+
 	}
-	
-	
-	
+
+
+
 	if(lang==2){
-		
+
 		do{
-	
-	
+
+
 	printf("Parola kaç karakterli olsun?: ");
 	scanf("%d",&k_sayi);
-	
+
 	printf("Büyük harf olsun mu? (y/n): ");
 	scanf(" %c",&kontrol_buyuk);
-	
+
 	printf("Sayý olsun mu? (y/n): ");
 	scanf(" %c",&kontrol_sayi);
-	
+
 	printf("Özel karakter olsun mu?: ");
 	scanf(" %c", &kontrol_okarakter);
-	
+
 	pass=(char *)malloc(k_sayi*sizeof(char));
-	
+
 	if(kontrol_buyuk=='y'&&kontrol_sayi=='y'&&kontrol_okarakter=='y'){
-		
+
 		for(i=0;i<k_sayi;i++){
 		pass[i]=kucuk_harf[rand()%(sizeof kucuk_harf-1)];
 		if(i>1){
@@ -181,40 +202,24 @@ int main(){
 				pass[i]=buyuk_harf[rand()%(sizeof buyuk_harf-1)];
 				break;
 			}
-			
+
 			while(i%3==2){
 				pass[i]=sayilar[rand()%(sizeof sayilar-1)];
 				break;
 			}
-			
+
 			while(i%(k_sayi-2)==2){
 				pass[i]=ozel_karakter[rand()%(sizeof ozel_karakter-1)];
 				break;
 			}
-			
+
 		}
-		
+
 	}
 	}
-	
-	if(kontrol_buyuk=='n'&&kontrol_sayi=='y'){
-		
-		for(i=0;i<k_sayi;i++){
-		pass[i]=kucuk_harf[rand()%(sizeof kucuk_harf-1)];
-		if(i>1){
-			
-			while(i%3==2){
-				pass[i]=sayilar[rand()%(sizeof sayilar-1)];
-				break;
-			}
-			
-		}
-		
-	}
-	}
-	
-	if(kontrol_buyuk=='y'&&kontrol_sayi=='n'){
-		
+
+	if(kontrol_buyuk=='y'&&kontrol_sayi=='y'&&kontrol_okarakter=='n'){
+
 		for(i=0;i<k_sayi;i++){
 		pass[i]=kucuk_harf[rand()%(sizeof kucuk_harf-1)];
 		if(i>1){
@@ -222,23 +227,60 @@ int main(){
 				pass[i]=buyuk_harf[rand()%(sizeof buyuk_harf-1)];
 				break;
 			}
-			
+
+			while(i%3==2){
+				pass[i]=sayilar[rand()%(sizeof sayilar-1)];
+				break;
+			}
+
+
 		}
-		
+
 	}
 	}
-	
+
+	if(kontrol_buyuk=='n'&&kontrol_sayi=='y'){
+
+		for(i=0;i<k_sayi;i++){
+		pass[i]=kucuk_harf[rand()%(sizeof kucuk_harf-1)];
+		if(i>1){
+
+			while(i%3==2){
+				pass[i]=sayilar[rand()%(sizeof sayilar-1)];
+				break;
+			}
+
+		}
+
+	}
+	}
+
+	if(kontrol_buyuk=='y'&&kontrol_sayi=='n'){
+
+		for(i=0;i<k_sayi;i++){
+		pass[i]=kucuk_harf[rand()%(sizeof kucuk_harf-1)];
+		if(i>1){
+			while(i%2==1){
+				pass[i]=buyuk_harf[rand()%(sizeof buyuk_harf-1)];
+				break;
+			}
+
+		}
+
+	}
+	}
+
 	if(kontrol_buyuk=='n'&&kontrol_sayi=='n'){
 		printf("Bu seçenek düþük güvenlikli parola oluþturacaktýr. Parolalarýnýzda büyük harf ve sayýyý ihmal etmemelisiniz...\n");
 		for(i=0;i<k_sayi;i++){
 		pass[i]=kucuk_harf[rand()%(sizeof kucuk_harf-1)];
-		
+
 	}
 	}
-	
-	
-	
-	
+
+
+
+
 	pass[i]='\0'; // Son indisteki içeriði NULL'a eþitledim ki dizginin sonunu belirtelim.
 	printf("\n\n==> Parolanýz: %s\n\n",pass);
 	printf("Parola düzenini deðiþtirmek ister misiniz? (y/n): ");
@@ -247,30 +289,29 @@ int main(){
 		while(duzen=='y'){
 			duzenDegistir(pass, k_sayi);
 			printf("%s\n",pass);
-			printf("Parola düzenini deðiþtirmek ister misiniz? (y/n): ");
+			printf("Parola düzenini tekrar deðiþtirmek istermisiniz? (y/n): ");
 			scanf(" %c",&duzen);
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 	free(pass);
 	printf("\nYeni parola oluþturmak ister misiniz? (y/n): ");
 	scanf(" %c",&secim);
-	
+
 	if(secim=='n'){
-		printf("\n\nParolalarýnýzý saklamayý ve sýklýkla deðistirmeyi unutmayýn. Görüþmek üzere...\n\n");
+		printf("\n\nParolalarýnýzý saklamayý ve sýk sýk deðiþtirmeyi unutmayýnýz...\n\n");
 	}
-		
-		
+
+
 	}while(secim=='y');
-		
+
 	}
-	
-	
-	
+
+
+
 	return 0;
 }
-
 
